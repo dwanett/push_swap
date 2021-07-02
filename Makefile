@@ -6,7 +6,7 @@
 #    By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 01:41:01 by dwanetta          #+#    #+#              #
-#    Updated: 2021/07/02 16:21:50 by dwanetta         ###   ########.fr        #
+#    Updated: 2021/07/02 16:53:29 by dwanetta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,13 @@ OPTION = -c
 LIB = -L libft/
 LIBFT = make -C libft
 OPTION_LIB = -lft
-SRCS =	push_swap.c
+SRCS =	push_swap.c\
+		push.c\
+		reverse_rotate.c\
+		rotate.c\
+		swap.c\
+		utils.c\
+		create_and_check_stack.c
 
 OBJS_SRCS = ${SRCS:.c=.o}
 

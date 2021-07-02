@@ -6,7 +6,7 @@
 /*   By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:32:42 by dwanetta          #+#    #+#             */
-/*   Updated: 2021/07/02 16:21:46 by dwanetta         ###   ########.fr       */
+/*   Updated: 2021/07/02 18:50:42 by dwanetta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft/libft.h"
+
+# include <stdio.h>
 
 typedef struct	s_stack
 {
