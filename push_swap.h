@@ -6,7 +6,7 @@
 /*   By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:32:42 by dwanetta          #+#    #+#             */
-/*   Updated: 2021/07/02 18:50:42 by dwanetta         ###   ########.fr       */
+/*   Updated: 2021/07/02 21:39:21 by dwanetta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ void			free_stack(t_stack **stack_a);
 int				check_arg_num(char *agr);
 void			check_stack_repeat_num(t_stack *stack_a);
 void			create_stack(t_stack **stack_a, int ac, char *av[]);
-void			pa(t_stack **stack_a, t_stack **stack_b);
-void			pb(t_stack **stack_a, t_stack **stack_b);
-void			sa(t_stack **stack_a);
-void			sb(t_stack **stack_a);
+void			pa(t_stack **stack_a, t_stack **stack_b, char c);
+void			pb(t_stack **stack_a, t_stack **stack_b, char c);
+void			sa(t_stack **stack_a, char c);
+void			sb(t_stack **stack_a, char c);
 void			ss(t_stack **stack_a, t_stack **stack_b);
-void			ra(t_stack **stack_a);
-void			rb(t_stack **stack_a);
+void			ra(t_stack **stack_a, char c);
+void			rb(t_stack **stack_a, char c);
 void			rr(t_stack **stack_a, t_stack **stack_b);
-void			rra(t_stack **stack_a);
-void			rrb(t_stack **stack_a);
+void			rra(t_stack **stack_a, char c);
+void			rrb(t_stack **stack_a, char c);
 void			rrr(t_stack **stack_a, t_stack **stack_b);
 #endif

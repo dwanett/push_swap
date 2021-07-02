@@ -6,7 +6,7 @@
 /*   By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:30:06 by dwanetta          #+#    #+#             */
-/*   Updated: 2021/07/02 19:35:46 by dwanetta         ###   ########.fr       */
+/*   Updated: 2021/07/02 21:40:03 by dwanetta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ void sort_three_elem(t_stack **stack, int size)
 	{
 		if ((*stack)->value > (*stack)->next->value)
 		{
-			sa(stack);
-			write(1, "sa\n", 3);
+			sa(stack, 'a');
 		}
 	}
 	else
@@ -59,18 +58,15 @@ void sort_three_elem(t_stack **stack, int size)
 		((*stack)->value < (*stack)->next->value && (*stack)->next->next->value < (*stack)->next->value && (*stack)->value < (*stack)->next->next->value) ||
 		((*stack)->value > (*stack)->next->value && (*stack)->next->value > (*stack)->next->next->value))
 		{
-			sa(stack);
-			write(1, "sa\n", 3);
+			sa(stack, 'a');
 		}
 		if ((*stack)->next->next->value < (*stack)->value && (*stack)->next->next->value < (*stack)->next->value)
 		{
-			rra(stack);
-			write(1, "rra\n", 4);
+			rra(stack, 'a');
 		}
 		if ((*stack)->next->value < (*stack)->value && (*stack)->next->next->value > (*stack)->next->value)
 		{
-			ra(stack);
-			write(1, "ra\n", 3);
+			ra(stack, 'a');
 		}
 	}
 }

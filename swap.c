@@ -6,13 +6,13 @@
 /*   By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:36:38 by dwanetta          #+#    #+#             */
-/*   Updated: 2021/06/27 18:45:31 by dwanetta         ###   ########.fr       */
+/*   Updated: 2021/07/02 21:38:29 by dwanetta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void sa(t_stack **stack_a)
+void sa(t_stack **stack_a, char c)
 {
 	t_stack *tmp;
 
@@ -23,15 +23,18 @@ void sa(t_stack **stack_a)
 		tmp->next = (*stack_a)->next;
 		(*stack_a)->next = tmp;
 	}
+	if (c == 'a')
+		write(1, "sa\n", 3);
 }
 
-void sb(t_stack **stack_b)
+void sb(t_stack **stack_b, char c)
 {
-	sa(stack_b);
+	sa(stack_b, c);
+	write(1, "sb\n", 3);
 }
 
 void ss(t_stack **stack_a, t_stack **stack_b)
 {
-	sa(stack_a);
-	sb(stack_b);
+	sa(stack_a, 'a');
+	sb(stack_b, 'b');
 }
