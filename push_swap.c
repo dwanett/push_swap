@@ -6,7 +6,7 @@
 /*   By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:30:06 by dwanetta          #+#    #+#             */
-/*   Updated: 2021/07/02 21:40:03 by dwanetta         ###   ########.fr       */
+/*   Updated: 2021/07/04 00:47:34 by dwanetta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void sort_stack(t_stack **stack_a, t_stack **stack_b, int size)
 			if ((*stack_b)!= NULL)
 				pa(stack_a, stack_b, 'a');
 		}
-		else if ((*stack_a)->next != NULL && ((*stack_a)->value > last_elem->value || ((*stack_a)->next->value > last_elem->value)))
+		else if ((*stack_a)->next != NULL && ((*stack_a)->value > last_elem->value && ((*stack_a)->next->value > last_elem->value)))
 		{
 			rra(stack_a, 'a');
 			if ((*stack_b)!= NULL)
