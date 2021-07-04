@@ -148,6 +148,87 @@ void sort_stack(t_stack **stack_a, t_stack **stack_b, int size)
 	}
 }
 
+void sort_stack_a(t_stack **stack_a, t_stack **stack_b)
+{
+
+}
+
+void sort_stack_b(t_stack **stack_a, t_stack **stack_b)
+{
+
+}
+
+int srech_mid_value(t_stack *stack, int size)
+{
+	t_stack *tmp;
+	t_stack *tmp_min;
+	t_stack *tmp_max;
+	int min;
+	int max;
+	int i;
+
+	tmp = stack;
+	min = stack->value;
+	max = stack->value;
+	i = 0;
+	tmp_min = stack;
+	tmp_max = stack;
+	while (stack != NULL)
+	{
+		stack->flag = 0;
+		stack = stack->next;
+	}
+	stack = tmp;
+	while (i != 5 /*|| (tmp_min->value != tmp_max->value)*/)
+	{
+		while (stack != NULL)
+		{
+			if (tmp_min->value >= stack->value && stack->flag == 0)
+				tmp_min = stack;
+			else if (stack->next->next == NULL && stack->next->flag == 1)
+			{
+				tmp_min = stack;
+				break ;
+			}
+			stack = stack->next;
+		}
+		tmp_min->flag = 1;
+		stack = tmp;
+		min = stack->value;
+		/*while (stack != NULL)
+		{
+			if (max >= stack->value)
+			{
+				if (tmp_max != NULL)
+					tmp_max->flag = 0;
+				tmp_max = stack;
+				stack->flag = 1;
+				max = stack->value;
+			}
+			stack = stack->next;
+		}*/
+		//stack = tmp;
+		i++;
+		printf("min = %d\n", min);
+		printf("max = %d\n", max);
+	}
+}
+
+void sort_big_stack(t_stack **stack_a, t_stack **stack_b, int size)
+{
+	t_stack *last_elem;
+	int i;
+
+	i = check_sort(*stack_a, size);
+	srech_mid_value((*stack_a), size);
+	//while (i == 1)
+	//{
+		//sort_stack_a(stack_a, stack_b);
+		//sort_stack_b(stack_a, stack_b);
+		//i = check_sort(*stack_a, size);
+	//}
+}
+
 int main(int ac, char *av[])
 {
 	t_stack *stack_a;
@@ -161,7 +242,10 @@ int main(int ac, char *av[])
 	check_stack_repeat_num(stack_a);
 	/*if (ac <= 4 && ac != 2)
 		sort_three_elem(&stack_a, ac - 1);*/
-	sort_stack(&stack_a, &stack_b, ac - 1);
+	if (ac <= 5)
+		sort_stack(&stack_a, &stack_b, ac - 1);
+	else
+		sort_big_stack(&stack_a, &stack_b, ac - 1);
 	print_stack(&stack_a);
 	print_stack(&stack_b);
 	free_stack(&stack_a);

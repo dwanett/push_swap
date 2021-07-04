@@ -22,6 +22,7 @@
 typedef struct	s_stack
 {
 	int					value;
+	int					flag;
 	struct s_stack		*next;
 }						t_stack;
 
