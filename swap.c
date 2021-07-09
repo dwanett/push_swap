@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void sa(t_stack **stack_a, char c)
+void sa(t_stack **stack_a, char c, int *count)
 {
 	t_stack *tmp;
 
@@ -25,16 +25,20 @@ void sa(t_stack **stack_a, char c)
 	}
 	if (c == 'a')
 		write(1, "sa\n", 3);
+	*count += 1;
 }
 
-void sb(t_stack **stack_b, char c)
+void sb(t_stack **stack_b, char c, int *count)
 {
-	sa(stack_b, c);
-	write(1, "sb\n", 3);
+	sa(stack_b, c, count);
+	if (c == 'b')
+		write(1, "sb\n", 3);
 }
 
-void ss(t_stack **stack_a, t_stack **stack_b)
+void ss(t_stack **stack_a, t_stack **stack_b, int *count)
 {
-	sa(stack_a, 'a');
-	sb(stack_b, 'b');
+	sa(stack_a, 's', count);
+	sb(stack_b, 's', count);
+	*count -= 1;
+	write(1, "ss\n", 3);
 }
