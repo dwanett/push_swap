@@ -6,7 +6,7 @@
 /*   By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:30:06 by dwanetta          #+#    #+#             */
-/*   Updated: 2021/07/05 03:06:52 by dwanetta         ###   ########.fr       */
+/*   Updated: 2021/07/10 17:30:51 by dwanetta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -419,150 +419,6 @@ int count_mid_stack_a(t_stack *stack, int mid)
 	return (i);
 }
 
-/*void del_stack(t_stack **stack_a, t_stack **stack_b, int mid, int *count)
-{
-	t_stack *min;
-	t_stack *last_elem_a;
-	t_stack *last_elem_b;
-	int i;
-	int mid_cnt;
-
-	serch_min_value((*stack_a), &min);
-	mid_cnt = 0;
-	while (min->value <= mid)
-	{
-		i = 0;
-		while ((*stack_a)->value != min->value)
-		{
-			last_elem_a = serch_last_elem((*stack_a));
-			if ((*stack_a) != NULL && (*stack_a)->next != NULL && ((*stack_a)->value > last_elem_a->value && ((*stack_a)->next->value > last_elem_a->value)))
-				rra(stack_a, 'a', count);
-			else if ((*stack_a) != NULL && (*stack_a)->next != NULL && (*stack_a)->value > (*stack_a)->next->value && (*stack_a)->value > last_elem_a->value)
-				ra(stack_a, 'a', count);
-			//test_print(stack_a, stack_b);
-			if ((*stack_a) != NULL && (*stack_a)->next != NULL && (*stack_a)->value > (*stack_a)->next->value)
-				sa(stack_a, 'a', count);
-			else if ((*stack_a)->value != min->value)
-			{
-				pb(stack_a, stack_b, 'b', count);
-				i++;
-			}
-			//write(1, "tut1\n", 5);
-			//test_print(stack_a, stack_b);
-		}
-		pb(stack_a, stack_b, 'b', count);
-		if (i != 0)
-		{
-			rb(stack_b, 'b', count);
-			mid_cnt = count_mid_stack_b((*stack_b), mid);
-		}
-		test_print(stack_a, stack_b);
-		printf("count = %d\n", *count);
-		//exit(0);
-		while (mid_cnt != 0)
-		{
-			last_elem_b = serch_last_elem((*stack_b));
-			if ((*stack_b)->value > mid)
-				pa(stack_a, stack_b, 'a', count);
-			if ((*stack_b) != NULL && (*stack_b)->next != NULL && ((*stack_b)->value < last_elem_b->value && ((*stack_b)->next->value < last_elem_b->value)))
-				rrb(stack_b, 'b', count);
-			else if ((*stack_b) != NULL && (*stack_b)->next != NULL && (*stack_b)->value < (*stack_b)->next->value && (*stack_b)->value < last_elem_b->value)
-				rb(stack_b, 'b', count);
-			//test_print(stack_a, stack_b);
-			else if (mid_cnt > 0)
-				rrb(stack_b, 'b', count);
-			if ((*stack_b) != NULL && (*stack_b)->next != NULL && (*stack_b)->value < (*stack_b)->next->value)
-				sb(stack_b, 'b', count);
-			if ((*stack_b)->value > mid)
-				pa(stack_a, stack_b, 'a', count);
-			mid_cnt = count_mid_stack_b((*stack_b) , mid);
-			//test_print(stack_a, stack_b);
-			//write(1, "tut2\n", 5);
-		}
-		//printf("count = %d\n", *count);
-		if (count_mid_stack_b((*stack_b), mid) == 0 && count_mid_stack_a((*stack_a), mid) == 0)
-			break ;
-		serch_min_value((*stack_a), &min);
-		//test_print(stack_a, stack_b);
-		//printf("count = %d\n", *count);
-		//exit(0);
-	}
-}*/
-
-/*
-void sort_satck_and_conect(t_stack **stack_a, t_stack **stack_b, int *count)
-{
-	int is_sort_a;
-	int is_sort_b;
-	t_stack *last_elem_a;
-	t_stack *last_elem_b;
-	int i;
-	t_stack *max;
-
-	is_sort_a = check_sort((*stack_a));
-	is_sort_b = check_sort_reverse((*stack_b));
-	i = 0;
-
-	while (is_sort_a && is_sort_b)
-	{
-		while (is_sort_a)
-		{
-			last_elem_a = serch_last_elem((*stack_a));
-			if ((*stack_a) != NULL && (*stack_a)->next != NULL && ((*stack_a)->value > last_elem_a->value && ((*stack_a)->next->value > last_elem_a->value)))
-				rra(stack_a, 'a', count);
-			else if ((*stack_a) != NULL && (*stack_a)->next != NULL && (*stack_a)->value > (*stack_a)->next->value && (*stack_a)->value > last_elem_a->value)
-				ra(stack_a, 'a', count);
-			//test_print(stack_a, stack_b);
-			if ((*stack_a) != NULL && (*stack_a)->next != NULL && (*stack_a)->value > (*stack_a)->next->value)
-				sa(stack_a, 'a', count);
-			is_sort_a = check_sort((*stack_a));
-			if (is_sort_a)
-			{
-				i++;
-				//write(1, "sort_a\n", 7);
-				pb(stack_a, stack_b, 'b', count);
-			}
-			//test_print(stack_a, stack_b);
-		}
-		//test_print(stack_a, stack_b);
-		//printf("count = %d\n", *count);
-		//exit(0);
-		while (i != 0)
-		{
-			pa(stack_a, stack_b, 'a', count);
-			i--;
-		}
-		is_sort_a = check_sort((*stack_a));
-		while (is_sort_b && is_sort_a == 0)
-		{
-			if ((*stack_b)->value == max->value && is_sort_a == 0)
-				pa(stack_a, stack_b, 'a', count);
-			else if ((*stack_b) != NULL && (*stack_b)->next != NULL && ((*stack_b)->value < last_elem_b->value && ((*stack_b)->next->value < last_elem_b->value)))
-				rrb(stack_b, 'b', count);
-			else if ((*stack_b) != NULL && (*stack_b)->next != NULL && (*stack_b)->value < (*stack_b)->next->value && (*stack_b)->value < last_elem_b->value)
-				rb(stack_b, 'b', count);
-			else if ((*stack_b) != NULL && (*stack_b)->next != NULL && (*stack_b)->value < (*stack_b)->next->value)
-				sb(stack_b, 'b', count);
-			else
-			{
-				i++;
-				pa(stack_a, stack_b, 'a', count);
-			}
-			serch_max_value((*stack_b), &max);
-			//test_print(stack_a, stack_b);
-			is_sort_b = check_sort_reverse((*stack_b));
-		}
-		while (i != 0)
-		{
-			pb(stack_a, stack_b, 'b', count);
-			i--;
-		}
-		is_sort_b = check_sort_reverse((*stack_b));
-	}
-	while ((*stack_b) != NULL)
-		pa(stack_a, stack_b, 'a', count);
-}
-*/
 t_stack *serch_posi_value_stack_a(t_stack *stack_a, t_stack *stack_b, int *posi_a)
 {
 	int i;
@@ -593,7 +449,6 @@ t_stack *serch_posi_value_stack_a(t_stack *stack_a, t_stack *stack_b, int *posi_
 void sort_stack_big_video(t_stack **stack_a, t_stack **stack_b, int mid, int *count, int size)
 {
 	t_stack *min;
-	int is_sort_b;
 	int posi_b;
 	int posi_a;
 	int i;
@@ -605,7 +460,6 @@ void sort_stack_big_video(t_stack **stack_a, t_stack **stack_b, int mid, int *co
 	t_stack *last_elem_b;
 
 	//serch_min_value((*stack_b), &min);
-	is_sort_b = 1;
 	pb(stack_a, stack_b,'b', count);
 	while(size != 1)
 	{
@@ -699,16 +553,81 @@ void sort_stack_big_video(t_stack **stack_a, t_stack **stack_b, int mid, int *co
 			pb(stack_a, stack_b, 'b', count);
 		}
 		size--;
-		test_print(stack_a, stack_b);
+		//test_print(stack_a, stack_b);
 	}
-	while ((*stack_b) != NULL && (*stack_b)->next != NULL && (*stack_b)->value < last_elem_b->value)
-		rb(stack_b, 'b', count);
-	//rb(stack_b, 'b', count);
-	test_print(stack_a, stack_b);
-	printf("count = %d\n", *count);
-	exit(0);
 }
 
+void rotate_stack_b(t_stack **stack_b, int size, int *count)
+{
+	t_stack *max;
+	t_stack *tmp;
+	int i;
+
+	serch_max_value((*stack_b), &max);
+	tmp = (*stack_b);
+	i = 0;
+	while ((*stack_b) != NULL)
+	{
+		if ((*stack_b) == max)
+			break;
+		i++;
+		(*stack_b) = (*stack_b)->next;
+	}
+	(*stack_b) = tmp;
+	if (i < size / 2)
+	{
+		while (check_sort_reverse_all((*stack_b), size) == 1)
+			rb(stack_b, 'b', count);
+	}
+	else
+	{
+		while ((check_sort_reverse_all((*stack_b), size)) == 1)
+			rrb(stack_b, 'b', count);
+	}
+}
+
+void help_sort_stack_b(t_stack **stack_b, int *count)
+{
+	t_stack *last_elem;
+	int i;
+
+	last_elem = serch_last_elem((*stack_b));
+	i = 1;
+	while (i != 0)
+	{
+		if ((*stack_b) != NULL && (*stack_b)->next != NULL && (*stack_b)->value < (*stack_b)->next->value &&
+			(*stack_b)->value < last_elem->value)
+			rb(stack_b, 'b', count);
+		else if ((*stack_b) != NULL && (*stack_b)->next != NULL &&
+				 ((*stack_b)->value < last_elem->value && ((*stack_b)->next->value < last_elem->value)))
+			rrb(stack_b, 'b', count);
+		else if ((*stack_b) != NULL && (*stack_b)->next != NULL && (*stack_b)->value < (*stack_b)->next->value)
+			sb(stack_b, 'b', count);
+		i = check_sort_reverse_all((*stack_b), 3);
+	}
+}
+
+void sort_stack_b(t_stack **stack_a, t_stack **stack_b, int *count, int size)
+{
+	int i;
+	t_count_step info_b;
+	t_stack *last_elem;
+	int posi_b;
+	t_stack *find_value_b;
+
+	i = 0;
+	while(i != 3)
+	{
+		pb(stack_a, stack_b, 'b', count);
+		i++;
+	}
+	help_sort_stack_b(stack_b, count);
+	last_elem = serch_last_elem((*stack_b));
+	info_b.size = i;
+	info_b.max = (*stack_b)->value;
+	info_b.min = last_elem->value;
+	find_value_b = serch_posi_value_stack_b((*stack_a), (*stack_b), &posi_b);
+}
 void sort_big_stack(t_stack **stack_a, t_stack **stack_b, int size, int *count)
 {
 	int i;
@@ -721,10 +640,15 @@ void sort_big_stack(t_stack **stack_a, t_stack **stack_b, int size, int *count)
 	{
 		//sort_stack_a(stack_a, stack_b, mid, count);
 		//del_stack(stack_a, stack_b, mid, count)
-		sort_stack_big_video(stack_a, stack_b, mid, count, size);
-		//test_print(stack_a, stack_b);
-		//printf("count = %d\n", *count);
-		//exit(0);
+		//sort_stack_big_video(stack_a, stack_b, mid, count, size);
+		sort_stack_b(stack_a, stack_b, count, size);
+		test_print(stack_a, stack_b);
+		/*rotate_stack_b(stack_b, size, count);
+		while ((*stack_b) != NULL)
+			pa(stack_a, stack_b, 'a', count);
+		test_print(stack_a, stack_b);*/
+		printf("count = %d\n", *count);
+		exit(0);
 		//sort_satck_and_conect(stack_a, stack_b, count);
 		i = check_sort_all(*stack_a, size);
 		//exit(0);
@@ -746,6 +670,7 @@ int main(int ac, char *av[])
 	check_stack_repeat_num(stack_a);
 	/*if (ac <= 4 && ac != 2)
 		sort_three_elem(&stack_a, ac - 1);*/
+	print_stack(&stack_a);
 	if (ac <= 5)
 		sort_stack(&stack_a, &stack_b, ac - 1, &count);
 	else

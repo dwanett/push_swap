@@ -26,6 +26,18 @@ typedef struct	s_stack
 	struct s_stack		*next;
 }						t_stack;
 
+typedef struct	s_count_step
+{
+	int					ra;
+	int					rb;
+	int					rr;
+	int					rra;
+	int					rrb;
+	int					rrr;
+	int					min;
+	int					max;
+	int					size;
+}						t_count_step;
 
 void			error_print(int code);
 void			free_stack(t_stack **stack_a);
