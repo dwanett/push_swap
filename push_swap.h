@@ -19,13 +19,6 @@
 
 # include <stdio.h>
 
-typedef struct	s_stack
-{
-	int					value;
-	int					flag;
-	struct s_stack		*next;
-}						t_stack;
-
 typedef struct	s_count_step
 {
 	int					ra;
@@ -34,10 +27,18 @@ typedef struct	s_count_step
 	int					rra;
 	int					rrb;
 	int					rrr;
-	int					min;
-	int					max;
-	int					size;
+	int					sum;
 }						t_count_step;
+
+typedef struct	s_stack
+{
+	int					value;
+	int					flag;
+	int					size;
+	t_count_step		info;
+	struct s_stack		*next;
+}						t_stack;
+
 
 void			error_print(int code);
 void			free_stack(t_stack **stack_a);

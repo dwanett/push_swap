@@ -355,14 +355,14 @@ t_stack *serch_posi_value_stack_b(t_stack *stack_a, t_stack *stack_b, int *posi)
 	serch_max_value(stack_b, &max);
 	if (stack_a->value < min->value)
 	{
-		while (stack_b != NULL && stack_b->value > min->value && stack_b->value != max->value)
+		while (stack_b != NULL && stack_b->value >= min->value && stack_b->value != max->value)
 		{
 			*posi += 1;
 			save_value = stack_b;
 			stack_b = stack_b->next;
 		}
-		if (*posi != 0)
-			*posi += 1;
+		/*if (*posi != 0)
+			*posi += 1;*/
 	}
 	else if (stack_a->value > max->value)
 	{
@@ -576,12 +576,12 @@ void rotate_stack_b(t_stack **stack_b, int size, int *count)
 	(*stack_b) = tmp;
 	if (i < size / 2)
 	{
-		while (check_sort_reverse_all((*stack_b), size) == 1)
+		while ((*stack_b) != max)
 			rb(stack_b, 'b', count);
 	}
 	else
 	{
-		while ((check_sort_reverse_all((*stack_b), size)) == 1)
+		while ((*stack_b) != max)
 			rrb(stack_b, 'b', count);
 	}
 }
@@ -607,13 +607,76 @@ void help_sort_stack_b(t_stack **stack_b, int *count)
 	}
 }
 
+void init_info(t_stack **stack_a)
+{
+	(*stack_a)->info.ra = 0;
+	(*stack_a)->info.rb = 0;
+	(*stack_a)->info.rr = 0;
+	(*stack_a)->info.rra = 0;
+	(*stack_a)->info.rrb = 0;
+	(*stack_a)->info.rrr = 0;
+	(*stack_a)->info.sum = 0;
+}
+
+void count_iter_for_elem(t_stack **stack_a, t_stack **stack_b)
+{
+	int posi_b;
+	t_stack *tmp;
+	int len_b;
+	int len_a;
+	int i;
+
+	len_b = len_stack((*stack_b));
+	len_a  = len_stack((*stack_a));
+	i = 0;
+	tmp = (*stack_a);
+	while ((*stack_a) != NULL)
+	{
+		serch_posi_value_stack_b((*stack_a), (*stack_b), &posi_b);
+		init_info(stack_a);
+		//serch_posi_value_stack_a((*stack_a), (*stack_b), &posi_a);
+		if (len_b / 2 >= posi_b)
+			(*stack_a)->info.rb = posi_b;
+		if (len_b / 2 < posi_b)
+			(*stack_a)->info.rrb = len_b - posi_b;
+		if (len_a / 2 >= i)
+			(*stack_a)->info.ra = i;
+		if (len_a / 2 < i)
+			(*stack_a)->info.rra = len_a - i;
+		while ((*stack_a)->info.ra != 0 && (*stack_a)->info.rb != 0)
+		{
+			(*stack_a)->info.ra--;
+			(*stack_a)->info.rb--;
+			(*stack_a)->info.rr++;
+		}
+		while ((*stack_a)->info.rra != 0 && (*stack_a)->info.rrb != 0)
+		{
+			(*stack_a)->info.rra--;
+			(*stack_a)->info.rrb--;
+			(*stack_a)->info.rrr++;
+		}
+		i++;
+		(*stack_a)->info.sum = (*stack_a)->info.rb + (*stack_a)->info.rrb + (*stack_a)->info.ra + (*stack_a)->info.rra + (*stack_a)->info.rr + (*stack_a)->info.rrr;
+		(*stack_a) = (*stack_a)->next;
+	}
+	(*stack_a) = tmp;
+}
+
+void serch_need_value(t_stack *stack_a, t_stack **need_value)
+{
+	(*need_value) = NULL;
+	while (stack_a != NULL)
+	{
+		if ((*need_value) == NULL || stack_a->info.sum < (*need_value)->info.sum)
+			(*need_value) = stack_a;
+		stack_a = stack_a->next;
+	}
+}
+
 void sort_stack_b(t_stack **stack_a, t_stack **stack_b, int *count, int size)
 {
 	int i;
-	t_count_step info_b;
-	t_stack *last_elem;
-	int posi_b;
-	t_stack *find_value_b;
+	t_stack *need_value;
 
 	i = 0;
 	while(i != 3)
@@ -622,11 +685,42 @@ void sort_stack_b(t_stack **stack_a, t_stack **stack_b, int *count, int size)
 		i++;
 	}
 	help_sort_stack_b(stack_b, count);
-	last_elem = serch_last_elem((*stack_b));
-	info_b.size = i;
-	info_b.max = (*stack_b)->value;
-	info_b.min = last_elem->value;
-	find_value_b = serch_posi_value_stack_b((*stack_a), (*stack_b), &posi_b);
+	while ((*stack_a) != NULL)
+	{
+		count_iter_for_elem(stack_a, stack_b);
+		serch_need_value((*stack_a), &need_value);
+		while (need_value->info.rr != 0)
+		{
+			rr(stack_a, stack_b, count);
+			need_value->info.rr--;
+		}
+		while (need_value->info.rrr != 0)
+		{
+			rrr(stack_a, stack_b, count);
+			need_value->info.rrr--;
+		}
+		while (need_value->info.ra != 0)
+		{
+			ra(stack_a, 'a', count);
+			need_value->info.ra--;
+		}
+		while (need_value->info.rra != 0)
+		{
+			rra(stack_a, 'a', count);
+			need_value->info.rra--;
+		}
+		while (need_value->info.rb != 0)
+		{
+			rb(stack_b, 'b', count);
+			need_value->info.rb--;
+		}
+		while (need_value->info.rrb != 0)
+		{
+			rrb(stack_b, 'b', count);
+			need_value->info.rrb--;
+		}
+		pb(stack_a, stack_b, 'b', count);
+	}
 }
 void sort_big_stack(t_stack **stack_a, t_stack **stack_b, int size, int *count)
 {
@@ -636,23 +730,14 @@ void sort_big_stack(t_stack **stack_a, t_stack **stack_b, int size, int *count)
 	i = check_sort_all(*stack_a, size);
 	mid = srech_mid_value((*stack_a));
 	printf("mid = %d\n", mid);
-	while (i == 1)
-	{
-		//sort_stack_a(stack_a, stack_b, mid, count);
-		//del_stack(stack_a, stack_b, mid, count)
-		//sort_stack_big_video(stack_a, stack_b, mid, count, size);
-		sort_stack_b(stack_a, stack_b, count, size);
-		test_print(stack_a, stack_b);
-		/*rotate_stack_b(stack_b, size, count);
-		while ((*stack_b) != NULL)
-			pa(stack_a, stack_b, 'a', count);
-		test_print(stack_a, stack_b);*/
-		printf("count = %d\n", *count);
-		exit(0);
-		//sort_satck_and_conect(stack_a, stack_b, count);
-		i = check_sort_all(*stack_a, size);
-		//exit(0);
-	}
+	sort_stack_b(stack_a, stack_b, count, size);
+	test_print(stack_a, stack_b);
+	rotate_stack_b(stack_b, size, count);
+	while ((*stack_b) != NULL)
+		pa(stack_a, stack_b, 'a', count);
+	test_print(stack_a, stack_b);
+	printf("count = %d\n", *count);
+	exit(0);
 }
 
 int main(int ac, char *av[])
