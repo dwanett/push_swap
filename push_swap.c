@@ -27,8 +27,8 @@ void	print_stack(t_stack **stack_a)
 		}
 		ft_putnbr_fd((*stack_a)->value, 1);
 		*stack_a = tmp;
+		write(1, "\n", 1);
 	}
-	write(1, "\n", 1);
 }
 
 void	test_print(t_stack **stack_a, t_stack **stack_b)
@@ -230,8 +230,7 @@ void	sort_stack_b(t_stack **stack_a, t_stack **stack_b, int *count, int size)
 		i++;
 	}
 	help_sort_stack_b(stack_b, count, i);
-	i = check_sort_all(*stack_a, size - i);
-	while ((*stack_a) != NULL && i == 1)
+	while ((*stack_a) != NULL)
 	{
 		count_iter_for_elem(stack_a, stack_b);
 		search_need_value((*stack_a), &need_value);
@@ -293,17 +292,20 @@ int	main(int ac, char *av[])
 	stack_a = NULL;
 	stack_b = NULL;
 	count = 0;
+	printf("ac = %d\n", ac);
 	if (ac == 1)
 		error_print(2);
 	create_stack(&stack_a, ac, av);
 	check_stack_repeat_num(stack_a);
-	if (ac <= 5)
+	if (ac - 1 <= 4)
 		sort_stack(&stack_a, &stack_b, ac - 1, &count);
+	else if (ac - 1 <= 6)
+		printf("size_stack = %d\n", ac - 1);
 	else
 		sort_big_stack(&stack_a, &stack_b, ac - 1, &count);
 	test_print(&stack_a, &stack_b);
 	printf("count = %d\n", count);
-	printf("size_stack = %d\n", ac -1);
+	printf("size_stack = %d\n", ac - 1);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);
