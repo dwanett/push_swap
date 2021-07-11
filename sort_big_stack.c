@@ -12,23 +12,20 @@
 
 #include "push_swap.h"
 
-t_stack	*search_posi_val_stack_b(t_stack *stack_a, t_stack *stack_b, int *posi)
+void	search_posi_val_stack_b(t_stack *stack_a, t_stack *stack_b, int *posi)
 {
-	int		i;
 	t_stack	*min;
 	t_stack	*max;
-	t_stack	*save_value;
 
-	i = 0;
 	*posi = 0;
 	search_min_value(stack_b, &min);
 	search_max_value(stack_b, &max);
 	if (stack_a->value < min->value)
 	{
-		while (stack_b != NULL && stack_b->value >= min->value && stack_b->value != max->value)
+		while (stack_b != NULL && stack_b->value >= min->value
+			&& stack_b->value != max->value)
 		{
 			*posi += 1;
-			save_value = stack_b;
 			stack_b = stack_b->next;
 		}
 	}
@@ -37,26 +34,11 @@ t_stack	*search_posi_val_stack_b(t_stack *stack_a, t_stack *stack_b, int *posi)
 		while (stack_b != NULL && stack_b->value < max->value)
 		{
 			*posi += 1;
-			save_value = stack_b;
 			stack_b = stack_b->next;
 		}
 	}
 	else
-	{
-		save_value = max;
-		while (stack_b != NULL)
-		{
-			if (stack_a->value <= stack_b->value && save_value->value >= stack_b->value)
-			{
-				save_value = stack_b;
-				*posi = i;
-			}
-			i++;
-			stack_b = stack_b->next;
-		}
-		*posi += 1;
-	}
-	return (save_value);
+		help_search_posi_val_stack_b(stack_a, stack_b, max, posi);
 }
 
 void	rotate_stack_b(t_stack **stack_b, int size, int *count)
@@ -88,7 +70,7 @@ void	rotate_stack_b(t_stack **stack_b, int size, int *count)
 	}
 }
 
-void	help_sort_stack_b(t_stack **stack_b, int *count, int size)
+void	small_sort_stack_b(t_stack **stack_b, int *count, int size)
 {
 	t_stack	*last_elem;
 	int		i;
@@ -108,22 +90,19 @@ void	help_sort_stack_b(t_stack **stack_b, int *count, int size)
 	}
 }
 
-void	count_iter_for_elem(t_stack **stack_a, t_stack **stack_b)
+void	count_iter_for_elem(t_stack **stack_a, t_stack **stack_b,
+			int len_a, int len_b)
 {
 	t_stack	*tmp;
 	int		posi_b;
-	int		len_b;
-	int		len_a;
 	int		i;
 
-	len_b = len_stack((*stack_b));
-	len_a = len_stack((*stack_a));
 	i = 0;
 	tmp = (*stack_a);
 	while ((*stack_a) != NULL)
 	{
-		search_posi_val_stack_b((*stack_a), (*stack_b), &posi_b);
 		init_info(stack_a);
+		search_posi_val_stack_b((*stack_a), (*stack_b), &posi_b);
 		if (len_b / 2 >= posi_b)
 			(*stack_a)->info.rb = posi_b;
 		if (len_b / 2 < posi_b)
@@ -132,23 +111,9 @@ void	count_iter_for_elem(t_stack **stack_a, t_stack **stack_b)
 			(*stack_a)->info.ra = i;
 		if (len_a / 2 < i)
 			(*stack_a)->info.rra = len_a - i;
-		while ((*stack_a)->info.ra != 0 && (*stack_a)->info.rb != 0)
-		{
-			(*stack_a)->info.ra--;
-			(*stack_a)->info.rb--;
-			(*stack_a)->info.rr++;
-		}
-		while ((*stack_a)->info.rra != 0 && (*stack_a)->info.rrb != 0)
-		{
-			(*stack_a)->info.rra--;
-			(*stack_a)->info.rrb--;
-			(*stack_a)->info.rrr++;
-		}
-		i++;
-		(*stack_a)->info.sum = (*stack_a)->info.rb + (*stack_a)->info.rrb
-			+ (*stack_a)->info.ra + (*stack_a)->info.rra
-			+ (*stack_a)->info.rr + (*stack_a)->info.rrr;
+		help_count_iter_for_elem(stack_a);
 		(*stack_a) = (*stack_a)->next;
+		i++;
 	}
 	(*stack_a) = tmp;
 }
@@ -157,6 +122,8 @@ void	sort_stack_b(t_stack **stack_a, t_stack **stack_b, int *count)
 {
 	t_stack	*need_value;
 	int		i;
+	int		len_a;
+	int		len_b;
 
 	i = 0;
 	while (i != 3)
@@ -164,41 +131,14 @@ void	sort_stack_b(t_stack **stack_a, t_stack **stack_b, int *count)
 		pb(stack_a, stack_b, 'b', count);
 		i++;
 	}
-	help_sort_stack_b(stack_b, count, i);
+	small_sort_stack_b(stack_b, count, i);
 	while ((*stack_a) != NULL)
 	{
-		count_iter_for_elem(stack_a, stack_b);
+		len_b = len_stack((*stack_b));
+		len_a = len_stack((*stack_a));
+		count_iter_for_elem(stack_a, stack_b, len_a, len_b);
 		search_need_value((*stack_a), &need_value);
-		while (need_value->info.rr != 0)
-		{
-			rr(stack_a, stack_b, count);
-			need_value->info.rr--;
-		}
-		while (need_value->info.rrr != 0)
-		{
-			rrr(stack_a, stack_b, count);
-			need_value->info.rrr--;
-		}
-		while (need_value->info.ra != 0)
-		{
-			ra(stack_a, 'a', count);
-			need_value->info.ra--;
-		}
-		while (need_value->info.rra != 0)
-		{
-			rra(stack_a, 'a', count);
-			need_value->info.rra--;
-		}
-		while (need_value->info.rb != 0)
-		{
-			rb(stack_b, 'b', count);
-			need_value->info.rb--;
-		}
-		while (need_value->info.rrb != 0)
-		{
-			rrb(stack_b, 'b', count);
-			need_value->info.rrb--;
-		}
+		help_sort_stack_b(stack_a, stack_b, count, &need_value);
 		pb(stack_a, stack_b, 'b', count);
 	}
 }

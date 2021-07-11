@@ -72,27 +72,11 @@ void	sort_small_stack(t_stack **stack_a, int *count, int size)
 	}
 }
 
-int count_iter_stack_a(t_stack *stack_a, t_stack *min)
+void	sort_middle_stack(t_stack **stack_a,
+			t_stack **stack_b, int size, int *count)
 {
-	int i;
+	int		stop;
 
-	i = 0;
-	while (stack_a != min)
-	{
-		i++;
-		stack_a = stack_a->next;
-	}
-	return (i);
-}
-
-void	sort_middle_stack(t_stack **stack_a, t_stack **stack_b, int size, int *count)
-{
-	int i;
-	int stop;
-	int posi_a;
-	t_stack *min;
-
-	i = 0;
 	if (size == 3)
 	{
 		sort_small_stack(stack_a, count, size);
@@ -104,32 +88,10 @@ void	sort_middle_stack(t_stack **stack_a, t_stack **stack_b, int size, int *coun
 		stop = 2;
 	if (size == 6)
 		stop = 3;
-	while (i != stop)
-	{
-		search_min_value((*stack_a), &min);
-		posi_a = count_iter_stack_a((*stack_a), min);
-		if (size / 2 >= posi_a)
-		{
-			while (posi_a != 0)
-			{
-				ra(stack_a, 'a', count);
-				posi_a--;
-			}
-		}
-		else if (size / 2 < posi_a)
-		{
-			while (posi_a != size - i)
-			{
-				rra(stack_a, 'a', count);
-				posi_a++;
-			}
-		}
-		pb(stack_a, stack_b, 'b',count);
-		i++;
-	}
+	help_sort_middle_stack(stack_a, stack_b, stop, count);
 	sort_small_stack(stack_a, count, size - stop);
 	while ((*stack_b) != NULL)
-		pa(stack_a, stack_b, 'a',count);
+		pa(stack_a, stack_b, 'a', count);
 }
 
 int	main(int ac, char *av[])
@@ -154,9 +116,7 @@ int	main(int ac, char *av[])
 			sort_middle_stack(&stack_a, &stack_b, ac - 1, &count);
 		else
 			sort_big_stack(&stack_a, &stack_b, ac - 1, &count);
-		//test_print(&stack_a, &stack_b);
-		//printf("count = %d\n", count);
-		//printf("size_stack = %d\n", ac - 1);
+		test_print(&stack_a, &stack_b);
 	}
 	free_stack(&stack_a);
 	free_stack(&stack_b);

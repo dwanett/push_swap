@@ -6,7 +6,7 @@
 #    By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 01:41:01 by dwanetta          #+#    #+#              #
-#    Updated: 2021/07/11 16:11:37 by dwanetta         ###   ########.fr        #
+#    Updated: 2021/07/12 01:42:31 by dwanetta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRCS =	push_swap.c\
 		utils.c\
 		utils_search.c\
 		sort_big_stack.c\
+		sort_middle_stack.c\
+		helpers_sort_big_stack.c\
 		create_and_check_stack.c
 
 OBJS_SRCS = ${SRCS:.c=.o}
