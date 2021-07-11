@@ -33,7 +33,7 @@ void	help_help_sort_stack_b(t_stack **stack_a, t_stack **stack_b,
 }
 
 void	help_sort_stack_b(t_stack **stack_a, t_stack **stack_b,
-					   int *count, t_stack **need_value)
+					int *count, t_stack **need_value)
 {
 	while ((*need_value)->info.rr != 0)
 	{

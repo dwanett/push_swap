@@ -17,8 +17,6 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 
-# include <stdio.h>
-
 typedef struct s_count_step
 {
 	int					ra;
@@ -52,15 +50,20 @@ t_stack			*search_last_elem(t_stack *stack);
 void			search_min_value(t_stack *stack_a, t_stack **min);
 void			search_max_value(t_stack *stack_a, t_stack **max);
 void			search_need_value(t_stack *stack_a, t_stack **need_value);
-void			search_posi_val_stack_b(t_stack *stack_a, t_stack *stack_b, int *posi);
+void			search_posi_val_stack_b(t_stack *stack_a,
+					t_stack *stack_b, int *posi);
 void			rotate_stack_b(t_stack **stack_b, int size, int *count);
 void			sort_stack_b(t_stack **stack_a, t_stack **stack_b, int *count);
-void			help_sort_stack_b(t_stack **stack_a, t_stack **stack_b, int *count, t_stack **need_value);
+void			help_sort_stack_b(t_stack **stack_a, t_stack **stack_b,
+					int *count, t_stack **need_value);
 void			help_count_iter_for_elem(t_stack **stack_a);
 int				count_iter_stack_a(t_stack *stack_a, t_stack *min);
-void			help_helcount_iter_for_elemp_sort_middle_stack(t_stack **stack_a, int size, int i, int *count);
-void			help_search_posi_val_stack_b(t_stack *stack_a, t_stack *stack_b, t_stack *max, int *posi);
-void			help_sort_middle_stack(t_stack **stack_a, t_stack **stack_b, int stop, int *count);
+void			help_helcount_iter_for_elemp_sort_middle_stack(
+					t_stack **stack_a, int size, int i, int *count);
+void			help_search_posi_val_stack_b(t_stack *stack_a,
+					t_stack *stack_b, t_stack *max, int *posi);
+void			help_sort_middle_stack(t_stack **stack_a, t_stack **stack_b,
+					int stop, int *count);
 void			pa(t_stack **stack_a, t_stack **stack_b, char c, int *count);
 void			pb(t_stack **stack_a, t_stack **stack_b, char c, int *count);
 void			sa(t_stack **stack_a, char c, int *count);
