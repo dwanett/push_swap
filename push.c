@@ -6,15 +6,15 @@
 /*   By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:36:38 by dwanetta          #+#    #+#             */
-/*   Updated: 2021/07/02 21:44:18 by dwanetta         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:23:30 by dwanetta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void pa(t_stack **stack_a, t_stack **stack_b, char c, int *count)
+void	pa(t_stack **stack_a, t_stack **stack_b, char c, int *count)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	tmp = (*stack_b);
 	if ((*stack_b) != NULL)
@@ -28,7 +28,7 @@ void pa(t_stack **stack_a, t_stack **stack_b, char c, int *count)
 	*count += 1;
 }
 
-void pb(t_stack **stack_a, t_stack **stack_b, char c, int *count)
+void	pb(t_stack **stack_a, t_stack **stack_b, char c, int *count)
 {
 	pa(stack_b, stack_a, c, count);
 	write(1, "pb\n", 3);

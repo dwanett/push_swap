@@ -6,13 +6,13 @@
 /*   By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:36:38 by dwanetta          #+#    #+#             */
-/*   Updated: 2021/06/27 18:45:40 by dwanetta         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:25:35 by dwanetta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void error_print(int code)
+void	error_print(int code)
 {
 	ft_putstr_fd("Error: ", 2);
 	if (code == 2)
@@ -26,9 +26,33 @@ void error_print(int code)
 	exit(code);
 }
 
-void free_stack(t_stack **stack_a)
+int	len_stack(t_stack *stack)
 {
-	t_stack *tmp;
+	int	len;
+
+	len = 0;
+	while (stack != NULL)
+	{
+		stack = stack->next;
+		len++;
+	}
+	return (len);
+}
+
+void	init_info(t_stack **stack_a)
+{
+	(*stack_a)->info.ra = 0;
+	(*stack_a)->info.rb = 0;
+	(*stack_a)->info.rr = 0;
+	(*stack_a)->info.rra = 0;
+	(*stack_a)->info.rrb = 0;
+	(*stack_a)->info.rrr = 0;
+	(*stack_a)->info.sum = 0;
+}
+
+void	free_stack(t_stack **stack_a)
+{
+	t_stack	*tmp;
 
 	if ((*stack_a) != NULL)
 	{

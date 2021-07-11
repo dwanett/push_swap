@@ -6,20 +6,20 @@
 /*   By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:39:53 by dwanetta          #+#    #+#             */
-/*   Updated: 2021/07/11 01:44:09 by dwanetta         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:22:53 by dwanetta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int check_arg_num(char *agr)
+int	check_arg_num(char *agr)
 {
-	int ret;
-	int i;
+	int	ret;
+	int	i;
 
 	ret = 1;
 	i = 0;
-	while(agr[i] != '\0')
+	while (agr[i] != '\0')
 	{
 		ret = ft_isdigit(agr[i]);
 		if (ret == 0 && agr[i] != '-')
@@ -29,16 +29,16 @@ int check_arg_num(char *agr)
 	return (ret);
 }
 
-void check_stack_repeat_num(t_stack *stack_a)
+void	check_stack_repeat_num(t_stack *stack_a)
 {
-	t_stack *tmp;
-	t_stack *tmp2;
+	t_stack	*tmp;
+	t_stack	*tmp2;
 
 	tmp = stack_a;
 	while (tmp != NULL)
 	{
 		tmp2 = stack_a;
-		while(tmp2 != NULL)
+		while (tmp2 != NULL)
 		{
 			if (tmp != tmp2 && tmp->value == tmp2->value)
 				error_print(5);
@@ -48,9 +48,9 @@ void check_stack_repeat_num(t_stack *stack_a)
 	}
 }
 
-void create_stack(t_stack **stack_a, int ac, char *av[])
+void	create_stack(t_stack **stack_a, int ac, char *av[])
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	tmp = NULL;
 	ac--;
@@ -66,4 +66,50 @@ void create_stack(t_stack **stack_a, int ac, char *av[])
 		tmp = *stack_a;
 		ac--;
 	}
+}
+
+int	check_sort_all(t_stack *stack, int size)
+{
+	int	tmp;
+	int	i;
+
+	i = 0;
+	if (stack == NULL)
+		return (1);
+	tmp = stack->value;
+	while (stack != NULL)
+	{
+		if (stack->value >= tmp)
+			tmp = stack->value;
+		else if (i < size)
+			return (1);
+		i++;
+		stack = stack->next;
+	}
+	if (i < size)
+		return (1);
+	return (0);
+}
+
+int	check_sort_reverse_all(t_stack *stack, int size)
+{
+	int	tmp;
+	int	i;
+
+	i = 0;
+	if (stack == NULL)
+		return (1);
+	tmp = stack->value;
+	while (stack != NULL)
+	{
+		if (stack->value <= tmp)
+			tmp = stack->value;
+		else if (i < size)
+			return (1);
+		i++;
+		stack = stack->next;
+	}
+	if (i < size)
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 01:41:01 by dwanetta          #+#    #+#              #
-#    Updated: 2021/07/02 16:53:29 by dwanetta         ###   ########.fr        #
+#    Updated: 2021/07/11 15:14:08 by dwanetta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS =	push_swap.c\
 		rotate.c\
 		swap.c\
 		utils.c\
+		utils_search.c\
 		create_and_check_stack.c
 
 OBJS_SRCS = ${SRCS:.c=.o}

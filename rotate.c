@@ -6,16 +6,16 @@
 /*   By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:36:38 by dwanetta          #+#    #+#             */
-/*   Updated: 2021/07/02 21:43:16 by dwanetta         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:24:25 by dwanetta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void ra(t_stack **stack_a, char c, int *count)
+void	ra(t_stack **stack_a, char c, int *count)
 {
-	t_stack *ferst;
-	t_stack *tmp;
+	t_stack	*ferst;
+	t_stack	*tmp;
 
 	ferst = (*stack_a);
 	if ((*stack_a) != NULL && (*stack_a)->next != NULL)
@@ -33,14 +33,14 @@ void ra(t_stack **stack_a, char c, int *count)
 	*count += 1;
 }
 
-void rb(t_stack **stack_b, char c, int *count)
+void	rb(t_stack **stack_b, char c, int *count)
 {
 	ra(stack_b, c, count);
 	if (c == 'b')
 		write(1, "rb\n", 3);
 }
 
-void rr(t_stack **stack_a, t_stack **stack_b, int *count)
+void	rr(t_stack **stack_a, t_stack **stack_b, int *count)
 {
 	ra(stack_a, 'r', count);
 	rb(stack_b, 'r', count);
