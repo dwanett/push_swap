@@ -634,7 +634,6 @@ void count_iter_for_elem(t_stack **stack_a, t_stack **stack_b)
 	{
 		serch_posi_value_stack_b((*stack_a), (*stack_b), &posi_b);
 		init_info(stack_a);
-		//serch_posi_value_stack_a((*stack_a), (*stack_b), &posi_a);
 		if (len_b / 2 >= posi_b)
 			(*stack_a)->info.rb = posi_b;
 		if (len_b / 2 < posi_b)
@@ -720,14 +719,13 @@ void sort_stack_b(t_stack **stack_a, t_stack **stack_b, int *count, int size)
 			need_value->info.rrb--;
 		}
 		pb(stack_a, stack_b, 'b', count);
+		size--;
 	}
 }
 void sort_big_stack(t_stack **stack_a, t_stack **stack_b, int size, int *count)
 {
-	int i;
 	int mid;
 
-	i = check_sort_all(*stack_a, size);
 	mid = srech_mid_value((*stack_a));
 	printf("mid = %d\n", mid);
 	sort_stack_b(stack_a, stack_b, count, size);
@@ -768,10 +766,3 @@ int main(int ac, char *av[])
 	free_stack(&stack_b);
 	return (0);
 }
-
-
-//100-500 size_stack_a / 12;
-//10-100 size_stack_a / 4;
-//0-10 size_stack_a / 2;
-
-//value < mid
