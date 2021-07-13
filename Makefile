@@ -6,13 +6,13 @@
 #    By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 01:41:01 by dwanetta          #+#    #+#              #
-#    Updated: 2021/07/12 01:42:31 by dwanetta         ###   ########.fr        #
+#    Updated: 2021/07/13 17:10:00 by dwanetta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = gcc
-FLAGS = -Wall -Wextra #-Werror
+FLAGS = -Wall -Wextra -Werror
 OPTION = -c
 LIB = -L libft/
 LIBFT = make -C libft
@@ -27,6 +27,7 @@ SRCS =	push_swap.c\
 		sort_big_stack.c\
 		sort_middle_stack.c\
 		helpers_sort_big_stack.c\
+		help_push_swap.c\
 		create_and_check_stack.c
 
 OBJS_SRCS = ${SRCS:.c=.o}

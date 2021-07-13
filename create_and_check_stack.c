@@ -6,7 +6,7 @@
 /*   By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:39:53 by dwanetta          #+#    #+#             */
-/*   Updated: 2021/07/11 15:22:53 by dwanetta         ###   ########.fr       */
+/*   Updated: 2021/07/13 17:40:32 by dwanetta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	create_stack(t_stack **stack_a, int ac, char *av[])
 			error_print(4);
 		if (check_arg_num(av[ac]) == 0)
 			error_print(3);
+		chek_argv_int(av[ac]);
 		(*stack_a)->value = ft_atoi(av[ac]);
 		(*stack_a)->next = tmp;
 		tmp = *stack_a;

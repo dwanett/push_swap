@@ -6,7 +6,7 @@
 /*   By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:36:38 by dwanetta          #+#    #+#             */
-/*   Updated: 2021/07/11 15:25:35 by dwanetta         ###   ########.fr       */
+/*   Updated: 2021/07/13 17:23:27 by dwanetta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	error_print(int code)
 		ft_putstr_fd("Memory\n", 2);
 	if (code == 5)
 		ft_putstr_fd("duplicate characters\n", 2);
+	if (code == 6)
+		ft_putstr_fd("Range value [-2147483648, 2147483647]\n", 2);
 	exit(code);
 }
 

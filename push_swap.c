@@ -6,36 +6,11 @@
 /*   By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:30:06 by dwanetta          #+#    #+#             */
-/*   Updated: 2021/07/10 17:30:51 by dwanetta         ###   ########.fr       */
+/*   Updated: 2021/07/12 20:05:50 by dwanetta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	print_stack(t_stack **stack_a)
-{
-	t_stack	*tmp;
-
-	tmp = *stack_a;
-	if ((*stack_a) != NULL)
-	{
-		while ((*stack_a)->next != NULL)
-		{
-			ft_putnbr_fd((*stack_a)->value, 1);
-			ft_putstr_fd(" ", 1);
-			*stack_a = (*stack_a)->next;
-		}
-		ft_putnbr_fd((*stack_a)->value, 1);
-		*stack_a = tmp;
-		write(1, "\n", 1);
-	}
-}
-
-void	test_print(t_stack **stack_a, t_stack **stack_b)
-{
-	print_stack(stack_a);
-	print_stack(stack_b);
-}
 
 void	sort_big_stack(t_stack **stack_a, t_stack **stack_b,
 			int size, int *count)
@@ -77,7 +52,7 @@ void	sort_middle_stack(t_stack **stack_a,
 {
 	int		stop;
 
-	if (size == 3)
+	if (size <= 3)
 	{
 		sort_small_stack(stack_a, count, size);
 		return ;
@@ -104,10 +79,12 @@ int	main(int ac, char *av[])
 	stack_a = NULL;
 	stack_b = NULL;
 	count = 0;
-	i = 0;
 	if (ac == 1)
 		error_print(2);
-	create_stack(&stack_a, ac, av);
+	if (ac == 2)
+		ac = create_stack_for_arg(&stack_a, av) + 1;
+	else
+		create_stack(&stack_a, ac, av);
 	check_stack_repeat_num(stack_a);
 	i = check_sort_all(stack_a, ac - 1);
 	if (i == 1)
@@ -116,9 +93,7 @@ int	main(int ac, char *av[])
 			sort_middle_stack(&stack_a, &stack_b, ac - 1, &count);
 		else
 			sort_big_stack(&stack_a, &stack_b, ac - 1, &count);
-		test_print(&stack_a, &stack_b);
 	}
 	free_stack(&stack_a);
-	free_stack(&stack_b);
 	return (0);
 }

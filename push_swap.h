@@ -6,7 +6,7 @@
 /*   By: dwanetta <dwanetta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:32:42 by dwanetta          #+#    #+#             */
-/*   Updated: 2021/07/02 21:39:21 by dwanetta         ###   ########.fr       */
+/*   Updated: 2021/07/13 17:40:14 by dwanetta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ typedef struct s_count_step
 typedef struct s_stack
 {
 	int					value;
-	int					flag;
-	int					size;
 	t_count_step		info;
 	struct s_stack		*next;
 }						t_stack;
@@ -64,6 +62,9 @@ void			help_search_posi_val_stack_b(t_stack *stack_a,
 					t_stack *stack_b, t_stack *max, int *posi);
 void			help_sort_middle_stack(t_stack **stack_a, t_stack **stack_b,
 					int stop, int *count);
+int				len_arg(char **arg);
+void			chek_argv_int(char *arg);
+int				create_stack_for_arg(t_stack **stack_a, char *av[]);
 void			pa(t_stack **stack_a, t_stack **stack_b, char c, int *count);
 void			pb(t_stack **stack_a, t_stack **stack_b, char c, int *count);
 void			sa(t_stack **stack_a, char c, int *count);
